@@ -28,6 +28,34 @@ key evaluation:
 -Memory management
 -Network handling
 -Complex UI Interaction.
+
+[Social Media Feed Implementation]
+
+-show a scrollable feed of post with images
+
+Used LazyColumn to create a scrollable feed.
+Simulated functionality with free images from Pixabay(Free image), reusing two images in the Post model to mimic a real feed.
+
+-support like/unlike functionality
+
+Used icons (ic_thumb_up and ic_thumb_down) that update based on the state of the Post.
+State is managed in the FeedViewModel and persists using DataStore.
+
+
+-has a comment section
+
+Added a comments section where users can view existing comments and dynamically add new ones.
+Implemented a TextField for entering comments, and a "Send" icon triggers adding the comment to the post.
+Pull-to-Refresh
+
+-Implemented pull-to-refresh functionality using a custom PullToRefreshLazyColumn.
+Refreshes the feed and updates the state of posts while retaining the "Like" and "Dislike" states.
+Pagination
+
+-use pagination got loading more posts
+Currently using LazyColumn for simplicity and performance.
+While Paging 3 would be ideal for massive datasets, it was deemed overkill due to the absence of real network APIs.
+
  */
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -51,6 +79,9 @@ class MainActivity : ComponentActivity() {
                         isRefreshing = isRefreshing,
                         onRefreshPosts = {
                             feedViewModel.onEvent(UiEvent.RefreshPosts)
+                        },
+                        onAddComment = { post, comment ->
+                            feedViewModel.onEvent(UiEvent.AddComment(post, comment))
                         }
                     )
                 }

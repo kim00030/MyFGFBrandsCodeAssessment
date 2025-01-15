@@ -18,6 +18,20 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.unit.dp
 
+/**
+ * A composable that displays a scrollable list with pull-to-refresh functionality.
+ *
+ * This composable combines a `LazyColumn` with a custom pull-to-refresh implementation,
+ * allowing the user to refresh the content by performing a swipe-down gesture.
+ *
+ * @param T The type of items in the list.
+ * @param items The list of items to be displayed in the `LazyColumn`.
+ * @param content The composable to be displayed for each item in the list.
+ * @param isRefreshing Indicates whether a refresh operation is currently in progress.
+ * @param onRefresh Callback triggered when the user performs a pull-to-refresh gesture.
+ * @param modifier Modifier to customize the layout of the composable.
+ * @param lazyListState The state of the `LazyColumn`, allowing scroll position preservation.
+ */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun <T> PullToRefreshLazyColumn(
