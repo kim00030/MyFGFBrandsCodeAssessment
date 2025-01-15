@@ -5,5 +5,5 @@ data class Post(
     val id: Int,
     val imageUrl: String,
     var liked: Boolean = false,
-    var comments: List<String> = listOf("Great post!", "Nice!")
+    var comments: List<String> = emptyList()
 )
