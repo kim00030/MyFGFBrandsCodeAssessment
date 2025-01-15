@@ -80,7 +80,9 @@ class FeedViewModel @Inject constructor(
                 newPosts.forEach { post ->
                     // Retrieve the like state for each post from DataStore
                     val likedState = dataStoreRepository.getLikeState(post.id).first()
-                    posts.add(post.copy(liked = likedState))
+                    // Retrieve the comments state for each post from DataStore
+                    val comments = dataStoreRepository.getComments(post.id).first()
+                    posts.add(post.copy(liked = likedState, comments = comments))
                 }
             } finally {
                 isRefreshing.value = false
