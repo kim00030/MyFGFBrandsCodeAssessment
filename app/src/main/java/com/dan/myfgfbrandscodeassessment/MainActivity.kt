@@ -11,6 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.dan.myfgfbrandscodeassessment.presentation.FeedScreen
 import com.dan.myfgfbrandscodeassessment.presentation.FeedViewModel
+import com.dan.myfgfbrandscodeassessment.presentation.event.UiEvent
 import com.dan.myfgfbrandscodeassessment.ui.theme.MyFGFBrandsCodeAssessmentTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -27,15 +28,9 @@ key evaluation:
 -Memory management
 -Network handling
 -Complex UI Interaction.
-
-
-Are you ready? This is a code assessment.
-WE pretend network, but no network
-I want to use MVVM. w
  */
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,15 +40,17 @@ class MainActivity : ComponentActivity() {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     val feedViewModel = hiltViewModel<FeedViewModel>()
                     val posts = feedViewModel.posts
-                    val isRefreshing = feedViewModel.isRefreshing
+                    val isRefreshing = feedViewModel.isRefreshing.value
 
                     FeedScreen(
                         posts = posts,
-                        onToggleLike = { feedViewModel.toggleLike(it) },
+                        onToggleLike = {
+                            feedViewModel.onEvent(UiEvent.ToggleLike(it))
+                        },
                         modifier = Modifier.padding(innerPadding),
-                        isRefreshing = isRefreshing.value,
+                        isRefreshing = isRefreshing,
                         onRefreshPosts = {
-                            feedViewModel.refreshPosts()
+                            feedViewModel.onEvent(UiEvent.RefreshPosts)
                         }
                     )
                 }

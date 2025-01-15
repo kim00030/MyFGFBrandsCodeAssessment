@@ -26,7 +26,7 @@ class PostRepositoryImpl : PostRepository {
     }
 
     override suspend fun refreshPosts(): List<Post> {
-        delay(2000) // Simulate network delay
+        delay(100) // Simulate network delay
         postsCache.clear()
         postsCache.addAll((1..100).map {
             Post(
