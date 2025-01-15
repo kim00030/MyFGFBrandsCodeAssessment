@@ -16,20 +16,10 @@ import com.dan.myfgfbrandscodeassessment.ui.theme.MyFGFBrandsCodeAssessmentTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 /*
-Create social media feed that:
--show a scrollable feed of post with images
--support like/unlike functionality
--has a comment section
--implemented pull tp refresh
--use pagination got loading more posts
-
-key evaluation:
--List performance
--Memory management
--Network handling
--Complex UI Interaction.
 
 [Social Media Feed Implementation]
+
+Author: Dan Kim
 
 -show a scrollable feed of post with images
 
@@ -41,21 +31,21 @@ Simulated functionality with free images from Pixabay(Free image), reusing two i
 Used icons (ic_thumb_up and ic_thumb_down) that update based on the state of the Post.
 State is managed in the FeedViewModel and persists using DataStore.
 
-
 -has a comment section
 
 Added a comments section where users can view existing comments and dynamically add new ones.
 Implemented a TextField for entering comments, and a "Send" icon triggers adding the comment to the post.
-Pull-to-Refresh
 
 -Implemented pull-to-refresh functionality using a custom PullToRefreshLazyColumn.
 Refreshes the feed and updates the state of posts while retaining the "Like" and "Dislike" states.
 Pagination
 
 -use pagination got loading more posts
-Currently using LazyColumn for simplicity and performance.
+Currently using LazyColumn for simplicity and performance as intended.
 While Paging 3 would be ideal for massive datasets, it was deemed overkill due to the absence of real network APIs.
 
+
+NOTE: There is no error checking since no real API over network
  */
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
